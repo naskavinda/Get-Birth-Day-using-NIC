@@ -18,7 +18,7 @@ function getBirthDay() {
                 days = days - daysOfMonth;
             }
         }
-    }else{
+    } else {
         alert("Not a Valid NIC");
     }
 
@@ -27,16 +27,17 @@ function getBirthDay() {
 function isNIC(NIC) {
     if (NIC.length === 10) {
         var nicNumber = NIC.substring(0, 9);
-        if (!isNaN(nicNumber)) {
+        var days = getDays(NIC);
+        if (!isNaN(nicNumber) && days <= 366) {
             if (NIC.substring(9, 11) === "v" || NIC.substring(9, 11) === "x") {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         } else {
             return false;
         }
-    }else{
+    } else {
         return false;
     }
 }
