@@ -1,19 +1,43 @@
 
+
+
+
 function getBirthDay() {
     var NIC = $("#NIC").val();
-    var year = getYear(NIC);
-    var days = getDays(NIC);
-
-    var i;
-    for (i = 1; i <= 12; i++) {
-        var daysOfMonth = daysInMonth(i, year);
-        if (days <= daysOfMonth) {
+    if (isNIC(NIC)) {
+        var year = getYear(NIC);
+        var days = getDays(NIC);
+        var i;
+        for (i = 1; i <= 12; i++) {
+            var daysOfMonth = daysInMonth(i, year);
+            if (days <= daysOfMonth) {
 //            return formatDate(new Date(year, i, days - daysOfMonth));
-            alert(formatDate(new Date(year, i, days - daysOfMonth)));
-            break;
-        } else {
-            days = days - daysOfMonth;
+                alert(formatDate(new Date(year, i, days - daysOfMonth)));
+                break;
+            } else {
+                days = days - daysOfMonth;
+            }
         }
+    }else{
+        alert("Not a Valid NIC");
+    }
+
+}
+
+function isNIC(NIC) {
+    if (NIC.length === 10) {
+        var nicNumber = NIC.substring(0, 9);
+        if (!isNaN(nicNumber)) {
+            if (NIC.substring(9, 11) === "v" || NIC.substring(9, 11) === "x") {
+                return true;
+            }else{
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }else{
+        return false;
     }
 }
 
